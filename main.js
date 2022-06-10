@@ -1,6 +1,5 @@
 const prompt = require("prompt-sync")({sigint: true});
 
-
 /*
 1. Figure out the UI
     - console.log()
@@ -16,6 +15,10 @@ const prompt = require("prompt-sync")({sigint: true});
     - array to store prompts
     - store those items as incomplete
     - start todo list at 1 (instead of index 0)
+    - store those items as incomplete
+        - incomplete = false
+        - complete = true
+        - let status_arr = [""]
 
 3. Complete incomplete items (choice === 2)
     - prompt the user for the number that is the same as the number in the to do list that we are trying to mark as complete
@@ -23,22 +26,32 @@ const prompt = require("prompt-sync")({sigint: true});
 */
 
 console.log("Welcome to the To-Do List Manager Application!\n")
-
 console.log("Select an action: ")
 console.log("[1] Create to-do item.")
 console.log("[2] Complete to-do item.")
 console.log("[3] Exit the application.")
 let choice = Number(prompt("> "));
 
+let items = [""]; // Our list of to-do items. The quotes are to take the "0" index
+let status_arr = [""];
+
 while(choice !== 3){
     if (choice === 1){
-        console.log("\nCreate a new item: \n");
+        // console.log("\nCreate a new item: \n");
+        let answer = prompt("Please enter an item: ");
+        items.push(answer);
+        status_arr.push(false);
+
+        print_list();
         select_choice();
     } else if (choice === 2){
         console.log("\nSelect item to complete: \n");
+
+        print_list();
         select_choice();
     } else {
         console.log("\nPlease choose a number between 1 and 3.\n");
+
         select_choice();
     }
 }
@@ -49,4 +62,17 @@ function select_choice(){
     console.log("[2] Complete to-do item.")
     console.log("[3] Exit the application.")
     choice = Number(prompt("> "));
+}
+function print_list(){
+    console.log("\nCurrent To-Do List")
+    let status = "";
+    for(let i = 1; i < items.length; i++){
+        if (status_arr[i] === false){
+            status = "[incomplete]";
+        } else if (status_arr[i] === true){
+            status = "[complete]";
+        }
+        console.log(`${i}. ${status} ${items[i]}`)
+    }
+    console.log("");
 }
