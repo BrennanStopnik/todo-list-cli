@@ -27,12 +27,26 @@ console.log("Welcome to the To-Do List Manager Application!\n")
 console.log("Select an action: ")
 console.log("[1] Create to-do item.")
 console.log("[2] Complete to-do item.")
+console.log("[3] Exit the application.")
 let choice = Number(prompt("> "));
 
-if (choice === 1){
-    console.log("Create a new item: ")
-} else if (choice === 2){
-    console.log("Select an item to complete: ")
-} else {
-    console.log("Please choose either 1 or 2.")
+while(choice !== 3){
+    if (choice === 1){
+        console.log("\nCreate a new item: \n");
+        select_choice();
+    } else if (choice === 2){
+        console.log("\nSelect item to complete: \n");
+        select_choice();
+    } else {
+        console.log("\nPlease choose a number between 1 and 3.\n");
+        select_choice();
+    }
+}
+
+function select_choice(){
+    console.log("Select an action: ")
+    console.log("[1] Create to-do item.")
+    console.log("[2] Complete to-do item.")
+    console.log("[3] Exit the application.")
+    choice = Number(prompt("> "));
 }
