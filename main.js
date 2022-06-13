@@ -25,7 +25,7 @@ const prompt = require("prompt-sync")({sigint: true});
     - conditional to check completion status
 */
 
-console.log("Welcome to the To-Do List Manager Application!\n")
+console.log("\nWelcome to the To-Do List Manager Application!\n")
 console.log("Select an action: ")
 console.log("[1] Create to-do item.")
 console.log("[2] Complete to-do item.")
@@ -46,6 +46,15 @@ while(choice !== 3){
         select_choice();
     } else if (choice === 2){
         console.log("\nSelect item to complete: \n");
+        let index_choice = Number(prompt("Item number: "));
+
+        while(index_choice > status_arr.length - 1){
+            console.log("Choose a number that corresponds with the list.");
+            index_choice = Number(prompt("Item number: "));
+        }
+        if (status_arr[index_choice] === false){
+            status_arr[index_choice] = true;
+        }
 
         print_list();
         select_choice();
@@ -64,7 +73,8 @@ function select_choice(){
     choice = Number(prompt("> "));
 }
 function print_list(){
-    console.log("\nCurrent To-Do List")
+    console.log("\n==============================\n")
+    console.log("\nCurrent To-Do List\n")
     let status = "";
     for(let i = 1; i < items.length; i++){
         if (status_arr[i] === false){
