@@ -36,31 +36,36 @@ let items = [""]; // Our list of to-do items. The quotes are to take the "0" ind
 let status_arr = [""];
 
 while(choice !== 3){
+
     if (choice === 1){
         // console.log("\nCreate a new item: \n");
         let answer = prompt("Please enter an item: ");
         items.push(answer);
         status_arr.push(false);
-
         print_list();
         select_choice();
     } else if (choice === 2){
-        console.log("\nSelect item to complete: \n");
-        let index_choice = Number(prompt("Item number: "));
 
-        while(index_choice > status_arr.length - 1){
-            console.log("Choose a number that corresponds with the list.");
-            index_choice = Number(prompt("Item number: "));
-        }
-        if (status_arr[index_choice] === false){
-            status_arr[index_choice] = true;
-        }
+        if (status_arr.length > 1){
 
+            console.log("\nSelect item to complete: \n");
+            let index_choice = Number(prompt("Item number: "));
+            
+            while(index_choice > status_arr.length - 1 || index_choice === 0 || isNaN(index_choice)){
+                console.log("Choose a number that corresponds with the list.");
+                index_choice = Number(prompt("Item number: "));
+            }
+            if (status_arr[index_choice] === false){
+                status_arr[index_choice] = true;
+            }
+            
+        } else{
+            console.log("You don't have any items in your list.");
+        }
         print_list();
         select_choice();
     } else {
         console.log("\nPlease choose a number between 1 and 3.\n");
-
         select_choice();
     }
 }
